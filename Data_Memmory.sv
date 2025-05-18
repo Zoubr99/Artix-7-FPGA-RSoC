@@ -62,7 +62,7 @@ module RAM (
 
     
   initial begin
-  $readmemh("testing_code_dly512.hex",Memory);
+  $readmemh("testing_code_tg_c.hex",Memory);
   end
     
 

@@ -62,7 +62,7 @@ end
 */
 
   initial begin
-  $readmemh("testing_code_dly512.hex",MEM);
+  $readmemh("testing_code_tg_c.hex",MEM);
   end
 
    wire [29:0] Word_addr = MEM_addr[31:2];

@@ -53,7 +53,7 @@ module mmio_sys
     .slot_rd_data_array(rd_data_array), 
     .slot_wr_data_array(wr_data_array)
     );
-  /*
+  
    // slot 0: system timer 
    timer timer_slot0 
    (.clk(clk),
@@ -65,7 +65,7 @@ module mmio_sys
     .rd_data(rd_data_array[`S0_SYS_TIMER]),
     .wr_data(wr_data_array[`S0_SYS_TIMER])
     );
-
+/*
    // slot 1: UART 
    uart_wc uart_slot1 
    (.clk(clk),
