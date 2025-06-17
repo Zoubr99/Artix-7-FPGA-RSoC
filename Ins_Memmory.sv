@@ -6,7 +6,7 @@ module Ins_Memmory(
   //input logic [31:0] MEM_Wdata,
 );
     
-   reg [31:0] MEM [0:1000];
+   reg [31:0] MEM [0:2000];
 	//reg [31:0] MEM [0:1500];
 
 
@@ -62,7 +62,7 @@ end
 */
 
   initial begin
-  $readmemh("testing_code_tg_c.hex",MEM);
+  $readmemh("testing_code_Sine.hex",MEM);
   end
 
    wire [29:0] Word_addr = MEM_addr[31:2];

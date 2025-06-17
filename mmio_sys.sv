@@ -95,6 +95,21 @@ module mmio_sys
     .dout(led)
     );
 
+       spi_core #(.S(1)) spi_slot4 
+   (.clk(clk),
+    .reset(reset),
+    .cs(cs_array[`S4_SPI]),
+    .read(mem_rd_array[`S4_SPI]),
+    .write(mem_wr_array[`S4_SPI]),
+    .addr(reg_addr_array[`S4_SPI]),
+    .rd_data(rd_data_array[`S4_SPI]),
+    .wr_data(wr_data_array[`S4_SPI]),
+    .spi_sclk(acl_sclk),
+    .spi_mosi(acl_mosi),
+    .spi_miso(acl_miso),
+    .spi_ss_n(acl_ss)
+    );
+
 /*
    // slot 3: gpi 
    gpi #(.W(N_SW)) gpi_slot3 

@@ -11,7 +11,12 @@ module SoC #(parameter BRG_BASE = 32'hc000_0000)
             output logic  [15:0] LEDS,
     
             input logic  rx, 
-            output logic TXD
+            output logic TXD,
+            output logic acl_sclk,
+            output logic acl_mosi,
+            input  logic acl_miso,
+            output logic acl_ss_n,
+            output logic ground 
 
     
     );
@@ -38,6 +43,8 @@ module SoC #(parameter BRG_BASE = 32'hc000_0000)
             wire [31:0] b_wr_data;    
             wire [31:0] b_rd_data;
             
+            reg logic_low = 0;   
+            assign ground = logic_low;
            
         CPU cpu(
             .CLK(clk),
@@ -76,21 +83,25 @@ module SoC #(parameter BRG_BASE = 32'hc000_0000)
     
     
     
-        // instantiated i/o subsystem
-       mmio_sys #(.N_SW(16),.N_LED(16)) mmio_unit (
-       .clk(clk),
-       .reset(resetn),
-       .mmio_cs(b_mmio_cs),
-       .mmio_wr(b_wr),
-       .mmio_rd(b_rd),
-       .mmio_addr(b_addr), 
-       .mmio_wr_data(b_wr_data),
-       .mmio_rd_data(b_rd_data),
-       .sw(SW),
-       .led(LEDS),
-       .rx(rx),
-       .tx(TXD)          
-      );             
+   // instantiated i/o subsystem
+   mmio_sys #(.N_SW(16),.N_LED(16)) mmio_unit (
+   .clk(clk),
+   .reset(reset_sys),
+   .mmio_cs(b_mmio_cs),
+   .mmio_wr(b_wr),
+   .mmio_rd(b_rd),
+   .mmio_addr(b_addr), 
+   .mmio_wr_data(b_wr_data),
+   .mmio_rd_data(b_rd_data),
+   .sw(SW),
+   .led(LEDS),
+   .rx(rx),
+   .tx(TXD),
+   .acl_sclk(acl_sclk),
+   .acl_mosi(acl_mosi),
+   .acl_miso(acl_miso),
+   .acl_ss(acl_ss_n)       
+  );           
 
 
       clk_divider #(.SLOW(1))
